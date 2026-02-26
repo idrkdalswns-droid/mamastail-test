@@ -1,6 +1,6 @@
 const { useState, useRef, useEffect, useCallback } = React;
 
-// --- MVP 시나리오 데이터 (엄마들의 마음을 여는 마법의 문구들) ---
+// --- MVP 시나리오 데이터 ---
 const SCENARIO = {
     1: [
         "어머니, 오늘 하루도 정말 애쓰셨어요. 아이를 돌보다 보면 정작 나 자신의 마음은 돌볼 틈이 없죠. 오늘 어머니의 마음 날씨는 어떤가요? 아주 작은 감정도 괜찮으니 편안하게 들려주세요.",
@@ -37,11 +37,18 @@ function MamastaleEngine() {
   const [turn, setTurn] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
   const [isFinished, setIsFinished] = useState(false);
+  const [showNotice, setShowNotice] = useState(false); // 양해 팝업 상태
+  const [pendingMsg, setPendingMsg] = useState("");
 
   const chatEndRef = useRef(null);
-  const inputRef = useRef(null);
+  const chatContainerRef = useRef(null);
 
-  useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, loading]);
+  // 스크롤 제어: 메시지 추가 시 하단으로만 부드럽게 (전체 화면 흔들림 방지)
+  useEffect(() => { 
+    if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [messages, loading]);
 
   const handleStart = () => {
     setShowIntro(false);
@@ -50,32 +57,18 @@ function MamastaleEngine() {
         setMessages([{ role: "assistant", content: SCENARIO[1][0], phase: 1 }]);
         setLoading(false);
     }, 1000);
-    
-    setTimeout(() => {
-        const frame = document.getElementById('engine-root');
-        if (frame) {
-            const offset = 80; 
-            const elementPosition = frame.getBoundingClientRect().top + window.pageYOffset;
-            window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
-        }
-    }, 100);
   };
 
-  const sendMessage = async () => {
-    if (!input.trim() || loading) return;
-
-    const userMsg = input.trim();
-    setInput("");
-    setMessages(prev => [...prev, { role: "user", content: userMsg }]);
+  const processMessage = async (msg) => {
+    setMessages(prev => [...prev, { role: "user", content: msg }]);
     setLoading(true);
 
-    await sleep(1500); // AI가 생각하는 느낌 연출
+    await sleep(1200); 
 
     let nextContent = "";
     let nextPhase = currentPhase;
     let nextTurn = turn + 1;
 
-    // 시나리오 로직
     if (currentPhase === 1) {
         if (turn === 0) nextContent = SCENARIO[1][1];
         else if (turn === 1) { nextContent = SCENARIO[1][2]; nextPhase = 2; nextTurn = 0; }
@@ -97,6 +90,20 @@ function MamastaleEngine() {
     setLoading(false);
   };
 
+  const sendMessage = () => {
+    if (!input.trim() || loading) return;
+    const msg = input.trim();
+    setInput("");
+
+    // 첫 메시지 전송 시 팝업 띄우기
+    if (turn === 0 && currentPhase === 1 && messages.length === 1) {
+        setPendingMsg(msg);
+        setShowNotice(true);
+    } else {
+        processMessage(msg);
+    }
+  };
+
   const phase = PHASES[currentPhase];
 
   if (showIntro) return (
@@ -110,12 +117,29 @@ function MamastaleEngine() {
   );
 
   return (
-    <div style={{ height: "650px", background: phase.color, display: "flex", flexDirection: "column", position: "relative" }}>
-      <div style={{ padding: "16px 20px", background: "rgba(255,255,255,0.6)", backdropFilter: "blur(10px)", textAlign: "center", borderBottom: "1px solid rgba(0,0,0,0.03)" }}>
+    <div style={{ height: "650px", background: phase.color, display: "flex", flexDirection: "column", position: "relative", overflow: "hidden" }}>
+      
+      {/* 양해 팝업 */}
+      {showNotice && (
+          <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.7)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "24px" }}>
+              <div style={{ background: "#fff", padding: "30px", borderRadius: "28px", textAlign: "center", boxShadow: "0 20px 50px rgba(0,0,0,0.3)", maxWidth: "340px", animation: "fadeUp 0.4s" }}>
+                  <div style={{ fontSize: "40px", marginBottom: "15px" }}>🎁</div>
+                  <h4 style={{ color: "#4A2D6B", marginBottom: "12px", fontWeight: "800" }}>무료 체험판 안내</h4>
+                  <p style={{ fontSize: "14px", color: "#666", lineHeight: "1.6", marginBottom: "25px" }}>
+                      어머니, 본 버전은 <strong style={{color: "#6D4C91"}}>무료 체험판</strong>입니다. <br/><br/>
+                      답변이 조금 짧거나 여정이 빠르게 진행될 수 있는 점 양해 부탁드려요. 곧 정식 버전에서 더 깊은 이야기를 나누실 수 있습니다!
+                  </p>
+                  <button onClick={() => { setShowNotice(false); processMessage(pendingMsg); }} className="btn" style={{ width: "100%", padding: "14px", background: "#6D4C91", color: "#fff" }}>확인했어요</button>
+              </div>
+          </div>
+      )}
+
+      <div style={{ padding: "16px 20px", background: "rgba(255,255,255,0.6)", backdropFilter: "blur(10px)", textAlign: "center", borderBottom: "1px solid rgba(0,0,0,0.03)", zIndex: 10 }}>
         <strong style={{ fontSize: "14px", color: phase.textColor, letterSpacing: "1px", fontWeight: "800" }}>{phase.name}</strong>
       </div>
 
-      <div style={{ flex: 1, overflowY: "auto", padding: "20px" }}>
+      {/* Messages: Ref 컨테이너 추가 및 스크롤 고정 */}
+      <div ref={chatContainerRef} style={{ flex: 1, overflowY: "auto", padding: "20px", WebkitOverflowScrolling: "touch" }}>
         {messages.map((m, i) => (
           <div key={i} style={{ marginBottom: "18px", textAlign: m.role === "user" ? "right" : "left" }}>
             <div className="chat-bubble" style={{ 
@@ -140,8 +164,8 @@ function MamastaleEngine() {
       </div>
 
       {!isFinished && (
-          <div style={{ padding: "16px 20px", background: "rgba(255,255,255,0.8)", borderTop: "1px solid #eee", display: "flex", gap: "12px" }}>
-            <textarea value={input} onChange={e => setInput(e.target.value)} placeholder="이야기를 들려주세요..." rows="1" style={{ flex: 1, padding: "14px 18px", borderRadius: "16px", border: "1px solid #ddd", outline: "none", fontSize: "16px" }} />
+          <div style={{ padding: "16px 20px", background: "rgba(255,255,255,0.8)", borderTop: "1px solid #eee", display: "flex", gap: "12px", zIndex: 10 }}>
+            <textarea value={input} onChange={e => setInput(e.target.value)} onKeyDown={(e) => {if(e.key === 'Enter' && !e.shiftKey) {e.preventDefault(); sendMessage();}}} placeholder="이야기를 들려주세요..." rows="1" style={{ flex: 1, padding: "14px 18px", borderRadius: "16px", border: "1px solid #ddd", outline: "none", fontSize: "16px" }} />
             <button onClick={sendMessage} disabled={loading} className="btn" style={{ width: "50px", height: "50px", padding: 0, background: phase.accent, color: "#fff" }}>↑</button>
           </div>
       )}
