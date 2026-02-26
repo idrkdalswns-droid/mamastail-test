@@ -1,4 +1,4 @@
-        /* --- 브랜드 컬러 팔레트 --- */
+/* --- 브랜드 컬러 팔레트 --- */
         :root {
             --color-primary: #6D4C91;     /* 소프트 퍼플 (메인) */
             --color-secondary: #E07A5F;   /* 웜 코랄 (포인트/버튼) */
@@ -67,7 +67,11 @@
         }
 
         /* --- 섹션 공통 --- */
-        section { padding: 100px 0; }
+        section { 
+            padding: 100px 0; 
+            scroll-margin-top: 80px; /* 헤더 높이만큼 여백 확보 */
+        }
+
         .sec-title {
             text-align: center;
             font-size: 2.5rem;
@@ -93,54 +97,72 @@
             padding: 15px 0;
         }
         .header-inner {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
             align-items: center;
         }
+        .header-left { justify-self: start; }
+        .header-center { justify-self: center; }
+        .header-right { justify-self: end; }
+
         .logo { 
-            font-size: 24px; 
+            font-size: 28px; 
             font-weight: 800; 
             color: var(--color-primary); 
             font-family: var(--font-title); 
+            letter-spacing: -1px;
+            display: inline-block;
         }
 
-        /* --- 1. 메인 히어로 섹션 --- */
+
+        /* --- 1. 메인 히어로 섹션 (전체 배경화면 버전) --- */
         .hero {
-            padding: 160px 0 100px;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            background: linear-gradient(180deg, var(--color-bg-cream) 0%, #ffffff 100%);
+            padding: 120px 0;
+            background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4), #ffffff), 
+                        url('./main-image.jpg') no-repeat center center;
+            background-size: cover;
+            /* background-attachment: fixed; 를 제거하여 스크롤 시 짤림 현상을 방지합니다 */
         }
-        .hero .badge {
-            display: inline-block;
-            background: var(--color-accent-gold);
-            color: #fff;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: 1px;
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
         }
+
         .hero h1 {
-            font-size: 3.8rem;
-            line-height: 1.3;
-            margin-bottom: 20px;
+            font-size: 4.2rem;
+            line-height: 1.2;
+            margin-bottom: 25px;
             color: var(--color-text-navy);
+            text-shadow: 0 2px 10px rgba(255,255,255,0.8);
         }
-        .hero h1 span { color: var(--color-primary); display: block; font-size: 1.8rem; margin-bottom: 15px;}
+        
+        .hero h1 span { color: var(--color-primary); display: block; font-size: 2rem; margin-bottom: 15px;}
+        
         .hero .slogan {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--color-secondary);
             margin-bottom: 40px;
             font-weight: 700;
         }
-        .hero-img {
-            max-width: 400px; /* 세로형 이미지 최적화 */
-            width: 100%;
-            border-radius: 20px;
-            margin-top: 50px;
-            box-shadow: 0 20px 40px rgba(109, 76, 145, 0.15);
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
+
+        .hero-img { display: none; } /* 기존 이미지는 배경으로 대체됨 */
+
 
         /* --- 2. 속마음 공감 섹션 --- */
         .empathy-bg { background-color: var(--color-bg-mint); border-radius: 40px; padding: 80px 40px; margin: 0 20px; }
@@ -293,17 +315,41 @@
         footer h2 { margin-bottom: 15px; font-size: 1.8rem; color: var(--color-bg-cream);}
         footer p { opacity: 0.7; font-size: 0.95rem; margin-bottom: 10px; }
 
-        /* --- 모바일 반응형 --- */
+        /* --- 모바일 반응형 (정밀 조정) --- */
         @media screen and (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .hero h1 span { font-size: 1.4rem; }
+            .hero {
+                padding: 80px 0;
+                min-height: 80vh; /* 모바일에서는 높이를 약간 줄임 */
+                background-attachment: scroll; /* 모바일 성능 및 버그 방지 */
+                background-position: 70% center; /* 엄마와 아이가 중앙에 오도록 위치 조정 */
+            }
+            .hero h1 { 
+                font-size: 2.4rem; 
+                word-break: keep-all;
+            }
+            .hero h1 span { font-size: 1.2rem; }
             .hero .slogan { font-size: 1.2rem; }
-            .sec-title { font-size: 2rem; }
-            .empathy-bg { padding: 50px 20px; border-radius: 25px;}
-            .empathy-list li { font-size: 1rem; padding: 15px 20px;}
-            .feature-card { flex-direction: column; gap: 15px; }
+            .hero-btns {
+                flex-direction: column;
+                padding: 0 20px;
+            }
+            .hero-btns .btn {
+                width: 100%;
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+            .sec-title { font-size: 1.8rem; }
+            .sec-desc { font-size: 1rem; padding: 0 10px; }
+            .empathy-bg { padding: 40px 15px; border-radius: 20px;}
+            .empathy-list li { font-size: 0.95rem; padding: 12px 15px;}
+            .feature-card { flex-direction: column; gap: 15px; padding: 25px; }
             .info-row { flex-direction: column; padding: 15px 0; }
-            .info-label { margin-bottom: 8px; width: 100%; }
-            .enroll-card { padding: 40px 20px; border-radius: 20px; }
-            .hero-img { max-width: 90%; }
+            .info-label { margin-bottom: 8px; width: 100%; font-size: 1rem; }
+            .enroll-card { padding: 30px 15px; border-radius: 20px; }
+            
+            /* 채팅 엔진 모바일 대응 */
+            #engine-root {
+                min-height: 500px !important;
+                border-radius: 15px !important;
+            }
         }

@@ -25,34 +25,45 @@
 
     <header>
         <div class="container header-inner">
-            <a href="#" class="logo">YUKIZ EdTech</a>
-            <a href="https://open.kakao.com/o/gSSkFmii" target="_blank" class="btn btn-kakao" style="padding: 10px 24px; font-size: 1rem; border-radius: 30px;">
-                <i class="fa-solid fa-comment"></i> 수강신청
-            </a>
+            <div class="header-left">
+                <a href="https://open.kakao.com/o/gSSkFmii" target="_blank" class="btn btn-kakao" style="padding: 8px 16px; font-size: 0.8rem; border-radius: 30px;">
+                    <i class="fa-solid fa-comment"></i> 오픈채팅
+                </a>
+            </div>
             
+            <div class="header-center">
+                <a href="#" class="logo">Mamastale</a>
+            </div>
+            
+            <div class="header-right">
+                <select id="lang-select" style="padding: 5px 10px; border-radius: 20px; border: 1px solid #ddd; font-size: 0.8rem; outline: none; cursor: pointer;">
+                    <option value="ko">한국어 (KO)</option>
+                    <option value="en">English (EN)</option>
+                </select>
+            </div>
         </div>
     </header>
 
     <section class="hero">
-        <div class="container">
-            <span class="badge">N번째 출산 프로젝트</span>
+        <div class="hero-content container">
             <h1 class="serif">
                 <span>나의 삶, 너의 동화</span>
-                엄마엄마동화
+                마마스테일
             </h1>
             <p class="slogan serif">"지난 내 과거가 널 위한 동화가 되었어"</p>
-            <p style="color: var(--color-text-light); font-size: 1.15rem; margin-bottom: 30px;">
-                엄마의 솔직한 삶의 경험(아픔, 슬픔, 기쁨, 성장)에서 빛나는 교훈을 추출하여,<br>
-                AI 도구를 활용해 내 아이만을 위한 세상에 하나뿐인 영상 동화를 직접 만드는 치유적 창작 워크숍
+            <p style="color: var(--color-text-navy); font-size: 1.25rem; margin-bottom: 40px; font-weight: 600;">
+                엄마의 솔직한 삶의 발자취에서 빛나는 보석을 찾아내어,<br>
+                아이의 마음을 어루만지는 세상에 하나뿐인 동화를 만드는 시간
             </p>
             
-            <a href="https://open.kakao.com/o/gSSkFmii" target="_blank" class="btn btn-kakao">
-                <i class="fa-solid fa-comment" style="margin-right: 5px;"></i> 오픈채팅으로 1기 신청하기
-            </a>
-            
-            <br>
-            <img src="./main-image.jpg" alt="아이에게 동화책을 읽어주는 따뜻한 엄마의 모습" class="hero-img">
-            
+            <div class="hero-btns">
+                <a href="#ai-engine" class="btn" style="padding: 18px 40px; font-size: 1.1rem; background-color: var(--color-primary);">
+                    무료 체험하기
+                </a>
+                <a href="https://open.kakao.com/o/gSSkFmii" target="_blank" class="btn" style="padding: 18px 40px; font-size: 1.1rem; background-color: var(--color-accent-gold);">
+                    오프라인 클래스 신청하기
+                </a>
+            </div>
         </div>
     </section>
 
@@ -260,11 +271,21 @@
 
     <section id="ai-engine" style="background-color: #fdfbff; padding: 100px 0;">
         <div class="container">
-            <h2 class="sec-title">AI 치유 엔진 체험하기</h2>
-            <p class="sec-desc">어머니의 상처를 동화로 승화시키는 AI의 공감과 창작 과정을 미리 경험해보세요.</p>
+            <h2 class="sec-title">나의 과거가 우리 아이를 위한 동화가 되다</h2>
+            <p class="sec-desc">마음속에 간직해온 소중한 이야기들을 꺼내어, 아이에게 들려줄 따뜻한 서사로 엮어보세요.</p>
             <div id="engine-root" style="min-height: 600px; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); background: #fff;">
                 <!-- React Engine will be rendered here -->
             </div>
+        </div>
+    </section>
+
+    <section id="feedback-cta" style="background-color: var(--color-bg-cream); padding: 60px 0; text-align: center;">
+        <div class="container">
+            <h3 class="serif" style="font-size: 1.8rem; color: var(--color-primary); margin-bottom: 15px;">여러분의 소중한 이야기를 들려주세요</h3>
+            <p style="font-size: 1.1rem; color: var(--color-text-main); margin-bottom: 30px;">체험 후 느낀 점이나 개선할 점, 혹은 나만의 사연을 나누고 싶다면 언제든 말씀해 주세요.</p>
+            <a href="https://open.kakao.com/o/gSSkFmii" target="_blank" class="btn btn-kakao" style="padding: 15px 40px; font-size: 1.1rem;">
+                <i class="fa-solid fa-comment"></i> 후기 남기기 & 의견 보내기
+            </a>
         </div>
     </section>
 
@@ -280,13 +301,13 @@
 
     <footer>
         <div class="container">
-            <h2 class="serif">YUKIZ EdTech</h2>
+            <h2 class="serif" style="font-size: 24px; font-weight: 800;">Mamastale</h2>
             <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-accent-gold); margin-bottom: 20px;">
-                "아이의 스크린 타임을 엄마의 크리에이터 타임으로"
+                "나의 과거가 아이를 위한 동화가 되다"
             </p>
             <p>프로그램명 : 엄마엄마동화 (부제: 나의 삶, 너의 동화: 8주의 마법)</p>
             <p>본 프로그램은 제임스 페니베이커의 표현적 글쓰기 및 심리학 이론에 기반하여 기획되었습니다.</p>
-            <p style="margin-top: 30px; font-size: 0.85rem; opacity: 0.5;">© 2026 YUKIZ Creative Lab. All rights reserved.</p>
+            <p style="margin-top: 30px; font-size: 0.85rem; opacity: 0.5;">© 2026 Mamastale. All rights reserved.</p>
         </div>
     </footer>
 
