@@ -1,1 +1,309 @@
-/* Add styles here */
+        /* --- 브랜드 컬러 팔레트 --- */
+        :root {
+            --color-primary: #6D4C91;     /* 소프트 퍼플 (메인) */
+            --color-secondary: #E07A5F;   /* 웜 코랄 (포인트/버튼) */
+            --color-bg-cream: #FEF7ED;    /* 크림 (배경) */
+            --color-bg-mint: #E6F5F1;     /* 민트 (서브 배경) */
+            --color-accent-gold: #D4A574; /* 골드 (강조) */
+            --color-text-navy: #2C3E6B;   /* 네이비 (제목 텍스트) */
+            --color-text-main: #333333;   /* 기본 텍스트 */
+            --color-text-light: #666666;  /* 서브 텍스트 */
+            
+            --font-title: 'Nanum Myeongjo', serif;
+            --font-body: 'Pretendard', sans-serif;
+        }
+
+        /* --- 기본 리셋 및 공통 스타일 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background-color: #ffffff;
+            color: var(--color-text-main);
+            line-height: 1.6;
+            word-break: keep-all;
+        }
+
+        h1, h2, h3, h4, .serif { font-family: var(--font-title); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- 공통 버튼 디자인 --- */
+        .btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: var(--color-secondary);
+            color: #ffffff;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(224, 122, 95, 0.3);
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #d16b50;
+            box-shadow: 0 12px 25px rgba(224, 122, 95, 0.4);
+        }
+
+        /* 🌟 카카오톡 전용 버튼 디자인 (직관성 강화) */
+        .btn-kakao {
+            background-color: #FEE500 !important;
+            color: #381E1F !important; /* 카카오 고유 텍스트 색상 */
+            box-shadow: 0 8px 20px rgba(254, 229, 0, 0.3) !important;
+        }
+        .btn-kakao:hover {
+            background-color: #FADA0A !important;
+            box-shadow: 0 12px 25px rgba(254, 229, 0, 0.4) !important;
+        }
+
+        /* --- 섹션 공통 --- */
+        section { padding: 100px 0; }
+        .sec-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        .sec-desc {
+            text-align: center;
+            font-size: 1.15rem;
+            color: var(--color-text-light);
+            margin-bottom: 60px;
+        }
+
+        /* --- 네비게이션 헤더 --- */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(254, 247, 237, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            padding: 15px 0;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { 
+            font-size: 24px; 
+            font-weight: 800; 
+            color: var(--color-primary); 
+            font-family: var(--font-title); 
+        }
+
+        /* --- 1. 메인 히어로 섹션 --- */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--color-bg-cream) 0%, #ffffff 100%);
+        }
+        .hero .badge {
+            display: inline-block;
+            background: var(--color-accent-gold);
+            color: #fff;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: 3.8rem;
+            line-height: 1.3;
+            margin-bottom: 20px;
+            color: var(--color-text-navy);
+        }
+        .hero h1 span { color: var(--color-primary); display: block; font-size: 1.8rem; margin-bottom: 15px;}
+        .hero .slogan {
+            font-size: 1.5rem;
+            color: var(--color-secondary);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+        .hero-img {
+            max-width: 400px; /* 세로형 이미지 최적화 */
+            width: 100%;
+            border-radius: 20px;
+            margin-top: 50px;
+            box-shadow: 0 20px 40px rgba(109, 76, 145, 0.15);
+        }
+
+        /* --- 2. 속마음 공감 섹션 --- */
+        .empathy-bg { background-color: var(--color-bg-mint); border-radius: 40px; padding: 80px 40px; margin: 0 20px; }
+        .empathy-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .empathy-list li {
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 15px;
+            font-size: 1.15rem;
+            color: var(--color-text-navy);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+        }
+        .empathy-list li i { color: var(--color-secondary); margin-right: 15px; font-size: 1.4rem; }
+        .empathy-conclusion { text-align: center; font-size: 1.8rem; color: var(--color-primary); font-weight: 800; line-height: 1.5;}
+
+        /* --- 3. 프로그램 개요 --- */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+        .overview-card {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid #f0f0f0;
+            transition: transform 0.3s;
+        }
+        .overview-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(109, 76, 145, 0.08); border-color: transparent;}
+        .overview-icon {
+            width: 80px; height: 80px;
+            background: var(--color-bg-cream);
+            color: var(--color-primary);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+        .overview-card h3 { font-size: 1.4rem; color: var(--color-text-navy); margin-bottom: 15px; }
+        .overview-card p { color: var(--color-text-light); font-size: 1rem; }
+
+        /* --- 4. 킬링 포인트 5가지 --- */
+        .features { background-color: var(--color-bg-cream); }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .feature-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 25px;
+            display: flex;
+            gap: 25px;
+            align-items: flex-start;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+            border-top: 5px solid var(--color-primary);
+        }
+        .feature-card:nth-child(even) { border-top-color: var(--color-secondary); }
+        .feature-num {
+            font-family: var(--font-title);
+            font-size: 3rem;
+            color: var(--color-accent-gold);
+            font-weight: 800;
+            line-height: 1;
+            opacity: 0.4;
+        }
+        .feature-text h3 { font-size: 1.35rem; color: var(--color-text-navy); margin-bottom: 12px; }
+        .feature-text p { color: var(--color-text-main); font-size: 1.05rem; }
+        
+        .feature-card.full { grid-column: 1 / -1; background: var(--color-bg-mint); border-top-color: var(--color-text-navy);}
+
+        /* --- 5. 커리큘럼 로드맵 --- */
+        .timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .tl-card {
+            background: #ffffff;
+            padding: 35px 25px;
+            border-radius: 20px;
+            border: 1px solid #eaeaea;
+            position: relative;
+        }
+        .tl-badge {
+            background: var(--color-text-navy);
+            color: #ffffff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .tl-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--color-primary); }
+        .tl-card ul { margin-bottom: 25px; min-height: 80px; }
+        .tl-card ul li { position: relative; padding-left: 15px; margin-bottom: 8px; font-size: 0.95rem; color: var(--color-text-light); }
+        .tl-card ul li::before { content: "•"; position: absolute; left: 0; color: var(--color-secondary); font-weight: bold; }
+        .tl-result {
+            background: var(--color-bg-cream);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+        }
+
+        /* --- 6. 수강신청 --- */
+        .enroll-card {
+            background: #ffffff;
+            border-radius: 30px;
+            padding: 60px;
+            max-width: 850px;
+            margin: 0 auto;
+            box-shadow: 0 25px 50px rgba(109, 76, 145, 0.1);
+            border: 2px solid var(--color-primary);
+        }
+        .info-row {
+            display: flex;
+            padding: 20px 0;
+            border-bottom: 1px dashed #ddd;
+            align-items: flex-start;
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label { width: 150px; font-weight: 800; color: var(--color-primary); font-size: 1.1rem; }
+        .info-value { flex: 1; font-size: 1.1rem; }
+        .highlight-box {
+            background: var(--color-bg-cream);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            color: var(--color-secondary);
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        .cta-wrap { text-align: center; margin-top: 20px; }
+
+        /* --- 푸터 --- */
+        footer {
+            background-color: var(--color-text-navy);
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        footer h2 { margin-bottom: 15px; font-size: 1.8rem; color: var(--color-bg-cream);}
+        footer p { opacity: 0.7; font-size: 0.95rem; margin-bottom: 10px; }
+
+        /* --- 모바일 반응형 --- */
+        @media screen and (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero h1 span { font-size: 1.4rem; }
+            .hero .slogan { font-size: 1.2rem; }
+            .sec-title { font-size: 2rem; }
+            .empathy-bg { padding: 50px 20px; border-radius: 25px;}
+            .empathy-list li { font-size: 1rem; padding: 15px 20px;}
+            .feature-card { flex-direction: column; gap: 15px; }
+            .info-row { flex-direction: column; padding: 15px 0; }
+            .info-label { margin-bottom: 8px; width: 100%; }
+            .enroll-card { padding: 40px 20px; border-radius: 20px; }
+            .hero-img { max-width: 90%; }
+        }

@@ -1,14 +1,296 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>엄마엄마동화 - 나의 삶, 너의 동화 | YUKIZ EdTech</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- React & Babel for the Engine -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">YUKIZ EdTech</a>
+            <a href="https://open.kakao.com/o/gSSkFmii" target="_blank" class="btn btn-kakao" style="padding: 10px 24px; font-size: 1rem; border-radius: 30px;">
+                <i class="fa-solid fa-comment"></i> 수강신청
+            </a>
+            
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="badge">N번째 출산 프로젝트</span>
+            <h1 class="serif">
+                <span>나의 삶, 너의 동화</span>
+                엄마엄마동화
+            </h1>
+            <p class="slogan serif">"지난 내 과거가 널 위한 동화가 되었어"</p>
+            <p style="color: var(--color-text-light); font-size: 1.15rem; margin-bottom: 30px;">
+                엄마의 솔직한 삶의 경험(아픔, 슬픔, 기쁨, 성장)에서 빛나는 교훈을 추출하여,<br>
+                AI 도구를 활용해 내 아이만을 위한 세상에 하나뿐인 영상 동화를 직접 만드는 치유적 창작 워크숍
+            </p>
+            
+            <a href="https://open.kakao.com/o/gSSkFmii" target="_blank" class="btn btn-kakao">
+                <i class="fa-solid fa-comment" style="margin-right: 5px;"></i> 오픈채팅으로 1기 신청하기
+            </a>
+            
+            <br>
+            <img src="./main-image.jpg" alt="아이에게 동화책을 읽어주는 따뜻한 엄마의 모습" class="hero-img">
+            
+        </div>
+    </section>
+
+    <section id="empathy" style="padding-top: 0;">
+        <div class="container">
+            <div class="empathy-bg">
+                <h2 class="sec-title">혹시, 이런 마음이신가요?</h2>
+                <p class="sec-desc">누구보다 아이를 사랑하지만, 엄마 자신만의 성취도 필요한 당신에게</p>
+                
+                <ul class="empathy-list">
+                    <li><i class="fa-solid fa-seedling"></i> "성장을 느낄 수 있는 새로운 취미 뭐 없나?"</li>
+                    <li><i class="fa-solid fa-book-open-reader"></i> "내 아이만을 위한 특별한 동화를 만들어 주고 싶어"</li>
+                    <li><i class="fa-solid fa-heart-crack"></i> "내 슬픔을 내 아이는 겪지 않았으면 해"</li>
+                    <li><i class="fa-solid fa-laptop-code"></i> "AI, 난 어떻게 활용할 수 있을까?"</li>
+                    <li><i class="fa-solid fa-mug-hot"></i> "비슷한 고민을 가진 엄마들과 교류하고 싶어"</li>
+                </ul>
+                
+                <h3 class="empathy-conclusion serif">
+                    그 마음들이 모여<br>
+                    <span style="color: var(--color-secondary);">아이를 위한 동화</span>가 됩니다.
+                </h3>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="sec-title">어떤 프로그램인가요?</h2>
+            <p class="sec-desc">단순 소비가 아닌 '창작 경험' + 확실한 결과물</p>
+            
+            <div class="overview-grid">
+                <div class="overview-card">
+                    <div class="overview-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                    <h3 class="serif">엄마의 경험이 동화로</h3>
+                    <p>기쁨, 슬픔, 분노, 성장... 내 삶의 이야기가 아이를 위한 세상에 하나뿐인 동화로 탄생합니다.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3 class="serif">AI로 직접 그려요</h3>
+                    <p>전문가가 아니어도 OK! AI 도구로 소재 선정부터 스토리, 이미지, 영상까지 모두 쉽게 생성합니다.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon"><i class="fa-solid fa-film"></i></div>
+                    <h3 class="serif">영상 동화로 완성</h3>
+                    <p>AI 영상에 아이가 가장 안정감을 느끼는 '엄마 목소리 내레이션'을 더해 수면 동화를 완성합니다.</p>
+                </div>
+                <div class="overview-card">
+                    <div class="overview-icon"><i class="fa-solid fa-book"></i></div>
+                    <h3 class="serif">실물 동화책까지!</h3>
+                    <p>인쇄된 실물 동화책 1부와 영상 동화 파일 1편을 평생 남는 유산으로 선물해 드립니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="sec-title">왜 특별한가요?</h2>
+            <p class="sec-desc">Tech(기술) + Narrative(서사) + Therapy(치유)의 완벽한 결합</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-num">01</div>
+                    <div class="feature-text">
+                        <h3 class="serif">세상에 단 하나뿐인 동화</h3>
+                        <p>엄마의 실제 경험에서 탄생한, 어떤 서점에서도 살 수 없는 유일한 맞춤형 교훈 동화입니다.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-num">02</div>
+                    <div class="feature-text">
+                        <h3 class="serif">엄마 목소리, 아이 정서에 최고</h3>
+                        <p>아이가 가장 안정감 느끼는 진짜 엄마 목소리로 녹음하여, 매일 밤 틀어주는 수면 동화로 활용합니다.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-num">03</div>
+                    <div class="feature-text">
+                        <h3 class="serif">내러티브 테라피: 만드는 과정이 치유</h3>
+                        <p>40년간 검증된 심리학 이론 기반. 상처를 동화의 은유로 승화하며 엄마 자신도 힐링을 경험합니다.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-num">04</div>
+                    <div class="feature-text">
+                        <h3 class="serif">엄마도 크리에이터, 새로운 스킬</h3>
+                        <p>Claude, AI 이미지/영상 툴 등 실전 콘텐츠 제작 스킬을 습득하여 유튜브 채널 운영까지 가능합니다.</p>
+                    </div>
+                </div>
+                <div class="feature-card full">
+                    <div class="feature-num" style="color: var(--color-primary); opacity: 1;">05</div>
+                    <div class="feature-text">
+                        <h3 class="serif" style="font-size: 1.6rem;">평생 남는 확실한 결과물</h3>
+                        <p style="font-size: 1.15rem; font-weight: 600; color: var(--color-primary);">영상 동화 1편 + 인쇄 동화책 1부 (수강료 내 100% 포함)</p>
+                        <p style="margin-top: 10px;">아이가 성인이 되어도 "엄마가 이런 마음으로 이야기를 들려줬구나" 간직할 수 있는 유산입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="curriculum">
+        <div class="container">
+            <h2 class="sec-title">8주의 마법 여정</h2>
+            <p class="sec-desc">주 2회 × 8주 = 총 16회 | 회당 90분 (디지털 초보, AI가 처음이어도 완벽하게 해낼 수 있습니다)</p>
+
+            <div class="timeline">
+                <div class="tl-card">
+                    <div class="tl-badge">PHASE 1 (Week 1~2)</div>
+                    <h3 class="serif">내 이야기 발굴</h3>
+                    <ul>
+                        <li>경험 브레인스토밍</li>
+                        <li>교훈 추출 + 세계관 구축</li>
+                        <li>10장면 동화 대본 완성</li>
+                    </ul>
+                    <div class="tl-result"><i class="fa-solid fa-check"></i> 동화 기획서 완성</div>
+                </div>
+                <div class="tl-card">
+                    <div class="tl-badge" style="background: var(--color-primary);">PHASE 2 (Week 3~4)</div>
+                    <h3 class="serif">세계를 그리다</h3>
+                    <ul>
+                        <li>AI 캐릭터 디자인</li>
+                        <li>프롬프트 황금 공식 마스터</li>
+                        <li>10장면 동화 이미지 생성</li>
+                    </ul>
+                    <div class="tl-result"><i class="fa-solid fa-check"></i> 캐릭터 + 이미지 세트</div>
+                </div>
+                <div class="tl-card">
+                    <div class="tl-badge" style="background: var(--color-secondary);">PHASE 3 (Week 5~6)</div>
+                    <h3 class="serif">숨결을 불어넣다</h3>
+                    <ul>
+                        <li>AI 영상 생성 (VEO3)</li>
+                        <li>엄마 목소리 내레이션 녹음</li>
+                        <li>스튜디오급 오디오 마스터링</li>
+                    </ul>
+                    <div class="tl-result"><i class="fa-solid fa-check"></i> 영상 클립 + 내레이션</div>
+                </div>
+                <div class="tl-card">
+                    <div class="tl-badge" style="background: var(--color-accent-gold);">PHASE 4 (Week 7~8)</div>
+                    <h3 class="serif">완성, 그리고 선물</h3>
+                    <ul>
+                        <li>영상 편집 (자막+BGM)</li>
+                        <li>인쇄 동화책 파일 레이아웃</li>
+                        <li>시사회 + 아이 초청 수료식</li>
+                    </ul>
+                    <div class="tl-result"><i class="fa-solid fa-check"></i> 영상 1편 + 동화책 1부</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="enroll" class="bg-cream">
+        <div class="container">
+            <h2 class="sec-title">수강생 모집 : 엄마엄마동화 1기</h2>
+            <p class="sec-desc">소규모 밀착 코칭을 위해 타임당 최대 4명으로 조기 마감될 수 있습니다.</p>
+
+            <div class="enroll-card">
+                <div class="info-row">
+                    <div class="info-label"><i class="fa-regular fa-calendar-check"></i> 일정</div>
+                    <div class="info-value">
+                        <strong>주 2회 × 8주 (총 16회)</strong><br>
+                        - A반: 매주 화 / 목<br>
+                        - B반: 매주 수 / 금
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label"><i class="fa-regular fa-clock"></i> 시간 & 정원</div>
+                    <div class="info-value">
+                        오전 10:30 ~ 12:00 (90분)<br>
+                        타임당 <strong>최대 4명</strong> (소규모 1:1 밀착 코칭)
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label"><i class="fa-solid fa-won-sign"></i> 수강료</div>
+                    <div class="info-value">
+                        <span style="font-size: 1.5rem; font-weight: 800; color: var(--color-primary);">총 400,000원</span>
+                        <span style="color: var(--color-text-light); font-size: 1rem;">(1회 25,000원 × 16회)</span>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label"><i class="fa-solid fa-laptop"></i> 준비물</div>
+                    <div class="info-value">
+                        AI 툴 활용 가능한 <strong>전자기기(노트북, 패드 권장)</strong> 및 이어폰<br>
+                        <span style="font-size: 0.9rem; color: var(--color-secondary);">* 수업에 사용되는 AI 도구(Claude, Gemini 등)는 모두 무료 버전으로 진행됩니다.</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    🎁 수료 특전 : 완성 영상 동화 1편 + 인쇄 동화책 실물 1부 증정
+                </div>
+
+                <div class="cta-wrap">
+                    
+                    <a href="https://open.kakao.com/o/gSSkFmii" target="_blank" class="btn btn-kakao" style="padding: 22px 60px; font-size: 1.3rem; width: 100%; max-width: 450px;">
+                        <i class="fa-solid fa-comment" style="margin-right: 8px;"></i> 지금 바로 카카오톡 신청하기
+                    </a>
+                    
+                    <p style="margin-top: 20px; font-size: 1.1rem; color: var(--color-text-main);">
+                        <strong>기타 문의</strong> | <i class="fa-solid fa-phone"></i> 010-2311-5166
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ai-engine" style="background-color: #fdfbff; padding: 100px 0;">
+        <div class="container">
+            <h2 class="sec-title">AI 치유 엔진 체험하기</h2>
+            <p class="sec-desc">어머니의 상처를 동화로 승화시키는 AI의 공감과 창작 과정을 미리 경험해보세요.</p>
+            <div id="engine-root" style="min-height: 600px; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); background: #fff;">
+                <!-- React Engine will be rendered here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="feedback-wall" style="background-color: #fff; padding: 80px 0;">
+        <div class="container">
+            <h2 class="sec-title">함께 나누는 마음</h2>
+            <p class="sec-desc">먼저 경험하신 엄마들의 치유 기록과 응원의 메시지입니다.</p>
+            <div id="comments-root">
+                <!-- Comments list will be rendered here -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h2 class="serif">YUKIZ EdTech</h2>
+            <p style="font-size: 1.1rem; font-weight: 700; color: var(--color-accent-gold); margin-bottom: 20px;">
+                "아이의 스크린 타임을 엄마의 크리에이터 타임으로"
+            </p>
+            <p>프로그램명 : 엄마엄마동화 (부제: 나의 삶, 너의 동화: 8주의 마법)</p>
+            <p>본 프로그램은 제임스 페니베이커의 표현적 글쓰기 및 심리학 이론에 기반하여 기획되었습니다.</p>
+            <p style="margin-top: 30px; font-size: 0.85rem; opacity: 0.5;">© 2026 YUKIZ Creative Lab. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="text/babel" src="main.js"></script>
+
 </body>
 </html>
